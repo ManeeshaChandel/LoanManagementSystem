@@ -8,16 +8,16 @@ import java.util.List;
 public class Customer {
     @Id
     @Column(name = "customer_id")
-    private String customerId;
+    private int customerId;
 
     @OneToMany(mappedBy = "customer")
     private List<Loan> loans;
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 

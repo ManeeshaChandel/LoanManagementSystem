@@ -9,7 +9,7 @@ public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "loan_id")
-    private Long loanId;
+    private int loanId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -40,12 +40,20 @@ public class Loan {
     @Column(name = "cancel")
     private boolean cancel;
 
-    public Long getLoanId() {
 
+    @Transient
+    public int getCustomerId() {
+        return customer.getCustomerId();
+    }
+    @Transient
+    public int getLenderId() {
+        return lender.getLenderId();
+    }
+    public int getLoanId() {
         return loanId;
     }
 
-    public void setLoanId(Long loanId) {
+    public void setLoanId(int loanId) {
         this.loanId = loanId;
     }
 

@@ -9,37 +9,41 @@ import com.greychain.loanmanagementsystem.entities.Loan;
 import com.greychain.loanmanagementsystem.service.LoanService;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class LoanManagementSystemApplicationTests {
 
     @Mock
     private LoanService loanService;
 
+    @InjectMocks
     private LoanController loanController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        loanController = new LoanController(loanService);
     }
 
     @Test
     public void testGetAllLoansWithEmptyList() {
         List<Loan> emptyList = new ArrayList<>();
         when(loanService.getAllLoans()).thenReturn(emptyList);
-
         ResponseEntity<List<Loan>> responseEntity = loanController.getAllLoans();
-
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 

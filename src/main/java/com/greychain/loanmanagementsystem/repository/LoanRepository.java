@@ -6,15 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface LoanRepository  extends CrudRepository<Loan,Integer>{
-    // Find loan by loan ID
     Loan findByLoanId(int id);
+    Loan findByCustomer_CustomerId(int customerId);
+    Loan findByLender_LenderId(int lenderid);
 
-    // Find loan by customer ID
-    Loan findByCustomerId(int id);
-
-    // Find loan by lender ID
-    Loan findByLenderId(int id);
-    // Lender: Calculate total remaining amount, interest, and penalty
     @Query("SELECT SUM(l.remainingAmount) FROM Loan l WHERE l.lender.lenderId = :lenderId")
     double calculateTotalRemainingAmountByLender(@Param("lenderId") int lenderId);
 

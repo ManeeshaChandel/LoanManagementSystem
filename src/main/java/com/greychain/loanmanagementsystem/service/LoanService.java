@@ -46,7 +46,7 @@ public class LoanService {
     public Loan getLoanByCustomerId(int id){
         Loan loan=null;
         try{
-            loan=this.loanRepository.findByCustomerId(id);
+            loan=this.loanRepository.findByCustomer_CustomerId(id);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class LoanService {
     public Loan getLoanByLenderId(int id){
         Loan loan=null;
         try{
-            loan=this.loanRepository.findByLenderId(id);
+            loan=this.loanRepository.findByLender_LenderId(id);
         }
         catch(Exception e){
             e.printStackTrace();
